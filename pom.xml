@@ -7,25 +7,10 @@
 	<properties>
 		<jdk.version>1.8</jdk.version>
 		<jdk>${env.JAVA_HOME}</jdk>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <suiteXmlFile>${basedir}/testng.xml</suiteXmlFile>
 	</properties>
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.0</version>
-				<configuration>
-					<source>${jdk.version}</source>
-					<target>${jdk.version}</target>
-
-					<executable>${jdk}/bin/javac</executable>
-					<fork>true</fork>
-
-				</configuration>
-			</plugin>
-
-		</plugins>
-	</build>
-	<dependencies>
+		<dependencies>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-server</artifactId>
@@ -54,4 +39,31 @@
 			<version>1.2.17</version>
 		</dependency>
 	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.0</version>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+
+					<executable>${jdk}/bin/javac</executable>
+					<fork>true</fork>
+
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.19.1</version>
+				<configuration>
+					<suiteXmlFiles>
+						<suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
+					</suiteXmlFiles>					
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>
